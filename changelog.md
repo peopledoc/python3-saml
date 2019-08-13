@@ -1,6 +1,6 @@
 # python3-saml changelog
 ### 1.7.0+1 (unreleased)
-* Nothing done yet
+* Get assertion when signature reference URI is empty
 
 ### 1.7.0 (Jul 02, 2019)
 * Adjusted acs endpoint to extract NameQualifier and SPNameQualifier from SAMLResponse. Adjusted single logout service to provide NameQualifier and SPNameQualifier to logout method. Add getNameIdNameQualifier to Auth and SamlResponse. Extend logout method from Auth and LogoutRequest constructor to support SPNameQualifier parameter. Align LogoutRequest constructor with SAML specs
