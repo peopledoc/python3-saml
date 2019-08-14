@@ -628,7 +628,7 @@ class OneLogin_Saml2_Response_Test(unittest.TestCase):
         # test signed assertion without reference URI
         xml = self.file_contents(join(self.data_path, 'responses', 'response_without_assertion_reference_uri.xml.base64'))
         response = OneLogin_Saml2_Response(settings, xml)
-        self.assertEqual('support@onelogin.com', response.get_nameid())
+        self.assertEqual('saml@user.com', response.get_nameid())
 
     def testGetIssuers(self):
         """
