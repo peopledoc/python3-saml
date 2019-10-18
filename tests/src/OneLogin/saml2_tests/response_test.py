@@ -1786,3 +1786,36 @@ class OneLogin_Saml2_Response_Test(unittest.TestCase):
         response.is_valid(request_data)
         self.assertIsNone(response.get_error())
         self.assertEqual(response.get_assertion_not_on_or_after(), 2671081021)
+
+    def testCustomValidateSign(self):
+        """
+        Test custom signature validation when specify validate_sign in settings.
+        """
+
+        xml = self.file_contents(join(self.data_path, 'responses', 'valid_response.xml.base64'))
+
+        def validate_sign(doc, cert, *args, **kwargs):
+            return cert == OneLogin_Saml2_Utils.format_cert('WeNeedCustomValidateSign')
+
+        # normal settings
+        settings_info = self.loadSettingsJSON()
+        settings = OneLogin_Saml2_Settings(settings_info)
+
+        # should be valid as always
+        response = OneLogin_Saml2_Response(settings, xml)
+        self.assertTrue(response.is_valid(self.get_request_data()))
+
+        # settings with custom validate_sign method
+        settings_info['validate_sign'] = validate_sign
+        settings = OneLogin_Saml2_Settings(settings_info)
+
+        # not valid according our custom valid_sign method
+        response = OneLogin_Saml2_Response(settings, xml)
+        self.assertFalse(response.is_valid(self.get_request_data()))
+
+        settings_info['idp']['x509cert'] = 'WeNeedCustomValidateSign'
+        settings = OneLogin_Saml2_Settings(settings_info)
+
+        # valid with our custom valid_sign method
+        response = OneLogin_Saml2_Response(settings, xml)
+        self.assertTrue(response.is_valid(self.get_request_data()))
