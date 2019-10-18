@@ -1,4 +1,7 @@
 # python3-saml changelog
+### 1.8.0+2 (unreleased)
+* Nothing done yet
+
 ### 1.8.0+1 (Oct 18, 2019)
 * Get assertion when signature reference URI is empty
 * Allow custom valid_sign method
