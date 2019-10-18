@@ -1,4 +1,7 @@
 # python3-saml changelog
+### 1.8.0+1 (unreleased)
+* nothing done yet
+
 ### 1.8.0 (Sep 11, 2019)
 * Set true as the default value for strict setting
 * [#152](https://github.com/onelogin/python3-saml/pull/152/files) Don't clean xsd and xsi namespaces
